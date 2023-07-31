@@ -11,9 +11,9 @@ import org.github.guifrancisco.danju.domain.dto.DataRegisterUser;
 import org.github.guifrancisco.danju.domain.dto.DataUpdateUser;
 
 import java.util.UUID;
-@Entity(name = "user")
-@Table(name = "user")
+@Entity
 @Getter
+@Table(name = "sys_user")
 @NoArgsConstructor
 public class User {
 
@@ -32,7 +32,7 @@ public class User {
         this.password = dataRegisterUser.password();
     }
 
-    public void updateData(DataUpdateUser dataUpdateUser) {
+    public void updateDataUser(DataUpdateUser dataUpdateUser) {
         if(dataUpdateUser.name() != null) {
             this.name = dataUpdateUser.name();
         }

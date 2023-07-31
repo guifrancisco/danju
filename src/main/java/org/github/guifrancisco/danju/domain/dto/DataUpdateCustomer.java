@@ -1,2 +1,9 @@
-package org.github.guifrancisco.danju.domain.dto;public record DataUpdateCustomer() {
+package org.github.guifrancisco.danju.domain.dto;
+
+public record DataUpdateCustomer(
+        String id,
+        String name,
+        String telephone,
+        String address
+) {
 }

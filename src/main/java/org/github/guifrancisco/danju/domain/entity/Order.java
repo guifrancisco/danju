@@ -6,8 +6,8 @@ import lombok.NoArgsConstructor;
 
 import java.util.List;
 
-@Entity(name = "order")
-@Table(name = "order")
+@Entity
+@Table(name = "customer_order")
 @Getter
 @NoArgsConstructor
 public class Order {

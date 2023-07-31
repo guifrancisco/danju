@@ -1,11 +1,13 @@
 package org.github.guifrancisco.danju.service;
 
 import lombok.extern.slf4j.Slf4j;
+
 import org.github.guifrancisco.danju.domain.dto.DataRegisterUser;
 import org.github.guifrancisco.danju.domain.dto.DataUpdateUser;
 import org.github.guifrancisco.danju.domain.dto.DataUser;
 import org.github.guifrancisco.danju.domain.entity.User;
 import org.github.guifrancisco.danju.repository.UserRepository;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -14,7 +16,11 @@ import org.springframework.stereotype.Service;
 @Slf4j
 public class UserService {
 
-    private UserRepository userRepository;
+    private final UserRepository userRepository;
+
+    public UserService(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
 
     public User findByLogin(String login) {
         log.info("[UserService.findByLogin] - [Service]");
@@ -31,7 +37,7 @@ public class UserService {
         log.info("[UserService.updateUser] - [Service]");
         User user = userRepository.findById(dataUpdateUser.id())
                 .orElseThrow(() -> new IllegalArgumentException("User not found"));
-        user.updateData(dataUpdateUser);
+        user.updateDataUser(dataUpdateUser);
         return  userRepository.save(user);
     }
 
