@@ -8,6 +8,7 @@ import org.github.guifrancisco.danju.domain.dto.DataUpdateCustomer;
 import org.github.guifrancisco.danju.domain.entity.Customer;
 import org.github.guifrancisco.danju.repository.CustomerRepository;
 
+import org.github.guifrancisco.danju.service.mapper.CustomerMapper;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -17,22 +18,25 @@ import org.springframework.stereotype.Service;
 public class CustomerService {
 
     private final CustomerRepository customerRepository;
+    private final CustomerMapper customerMapper;
 
-    public CustomerService(CustomerRepository customerRepository) {
+    public CustomerService(CustomerRepository customerRepository, CustomerMapper customerMapper) {
         this.customerRepository = customerRepository;
+        this.customerMapper = customerMapper;
     }
 
-    public Customer registerCustomer(DataRegisterCustomer dataRegisterCustomer){
+    public void registerCustomer(DataRegisterCustomer dataRegisterCustomer){
         log.info("[CustomerService.registerCustomer] - [Service]");
-        return customerRepository.save(new Customer(dataRegisterCustomer));
+        Customer customer = customerMapper.toEntity(dataRegisterCustomer);
+        customerRepository.save(customer);
     }
 
-    public Customer updateCustomer(String id,DataUpdateCustomer dataUpdateCustomer){
+    public void updateCustomer(String id,DataUpdateCustomer dataUpdateCustomer){
         log.info("[CustomerService.updateCustomer] - [Service]");
         Customer customer = customerRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Customer with id " + id + " not found"));
-        customer.updateDataCustomer(dataUpdateCustomer);
-        return customerRepository.save(customer);
+        customerMapper.updateEntityFromDto(customer,dataUpdateCustomer);
+        customerRepository.save(customer);
     }
 
     public void deleteCustomer(String id){
@@ -45,7 +49,7 @@ public class CustomerService {
     public Page<DataCustomer> findAllCustomers(Pageable pageable){
         log.info("[CustomerService.findAllCustomers] - [Service]");
         Page<Customer> customers = customerRepository.findAll(pageable);
-        return customers.map(DataCustomer::new);
+        return customers.map(customerMapper::toDto);
     }
 
 

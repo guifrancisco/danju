@@ -6,7 +6,6 @@ import org.github.guifrancisco.danju.domain.dto.DataCustomer;
 import org.github.guifrancisco.danju.domain.dto.DataRegisterCustomer;
 import org.github.guifrancisco.danju.domain.dto.DataUpdateCustomer;
 import org.github.guifrancisco.danju.service.CustomerService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
@@ -37,7 +36,7 @@ public class CustomerController {
     public ResponseEntity<String> updateCustomer(@PathVariable String id, @RequestBody DataUpdateCustomer dataUpdateCustomer){
         log.info("[CustomerController.updateCustomer] - [Controller]");
         customerService.updateCustomer(id ,dataUpdateCustomer);
-        return ResponseEntity.ok("Employee updated successfully");
+        return ResponseEntity.ok("Customer updated successfully");
     }
 
     @GetMapping

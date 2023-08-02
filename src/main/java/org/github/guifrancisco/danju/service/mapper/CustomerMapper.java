@@ -1,5 +1,6 @@
-package org.github.guifrancisco.danju.service;
+package org.github.guifrancisco.danju.service.mapper;
 
+import org.github.guifrancisco.danju.domain.dto.DataCustomer;
 import org.github.guifrancisco.danju.domain.dto.DataRegisterCustomer;
 import org.github.guifrancisco.danju.domain.dto.DataUpdateCustomer;
 import org.github.guifrancisco.danju.domain.entity.Customer;
@@ -15,12 +16,13 @@ public class CustomerMapper {
         customer.setId(UUID.randomUUID().toString());
         customer.setName(dataRegisterCustomer.name());
         customer.setTelephone(dataRegisterCustomer.telephone());
-        customer.setTelephone(dataRegisterCustomer.address());
+        customer.setAddress(dataRegisterCustomer.address());
         return customer;
     }
 
-    public DataRegisterCustomer toDto(Customer customer){
-        return new DataRegisterCustomer(
+    public DataCustomer toDto(Customer customer){
+        return new DataCustomer(
+                customer.getId(),
                 customer.getName(),
                 customer.getTelephone(),
                 customer.getAddress()
