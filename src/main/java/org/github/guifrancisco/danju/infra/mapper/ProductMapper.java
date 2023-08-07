@@ -1,4 +1,4 @@
-package org.github.guifrancisco.danju.service.mapper;
+package org.github.guifrancisco.danju.mapper;
 
 import org.github.guifrancisco.danju.domain.dto.DataProduct;
 import org.github.guifrancisco.danju.domain.dto.DataRegisterProduct;

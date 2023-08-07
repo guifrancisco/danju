@@ -12,7 +12,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-public class OrderProduct {
+public class PurchaseItem {
 
     @Id
     private String id;
