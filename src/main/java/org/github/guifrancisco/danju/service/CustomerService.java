@@ -6,9 +6,9 @@ import org.github.guifrancisco.danju.domain.dto.DataCustomer;
 import org.github.guifrancisco.danju.domain.dto.DataRegisterCustomer;
 import org.github.guifrancisco.danju.domain.dto.DataUpdateCustomer;
 import org.github.guifrancisco.danju.domain.entity.Customer;
-import org.github.guifrancisco.danju.repository.CustomerRepository;
+import org.github.guifrancisco.danju.infra.repository.CustomerRepository;
 
-import org.github.guifrancisco.danju.service.mapper.CustomerMapper;
+import org.github.guifrancisco.danju.infra.mapper.CustomerMapper;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;

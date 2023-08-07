@@ -27,22 +27,26 @@ public class ProductController {
     @PostMapping
     @Transactional
     public ResponseEntity<String> registerProduct(@RequestBody DataRegisterProduct dataRegisterProduct){
+        log.info("[ProductController.registerProduct] - [Controller]");
         productService.registerProduct(dataRegisterProduct);
         return new ResponseEntity<>("Product created successfully", HttpStatus.CREATED);
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<String> updateProduct(@PathVariable String id, @RequestBody DataUpdateProduct dataUpdateProduct){
+        log.info("[ProductController.updateProduct] - [Controller]");
         productService.updateProduct(id,dataUpdateProduct);
         return ResponseEntity.ok("Product updated successfully");
     }
     @GetMapping
     public ResponseEntity<Page<DataProduct>> findAllProducts(@PageableDefault(size = 10) Pageable pageable){
+        log.info("[ProductController.findAllProducts] - [Controller]");
         Page<DataProduct> products = productService.findAllProducts(pageable);
         return ResponseEntity.ok().body(products);
     }
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteProduct(@PathVariable String id){
+        log.info("[ProductController.deleteProduct] - [Controller]");
         productService.deleteProduct(id);
         return ResponseEntity.noContent().build();
     }

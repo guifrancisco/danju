@@ -10,6 +10,8 @@ public record DataRegisterUser(
         @NotBlank
         String login,
         @NotBlank
-        String password
+        String password,
+        @NotBlank
+        String role
 ) {
 }

@@ -1,4 +1,7 @@
 package org.github.guifrancisco.danju.domain.dto;
 
-public record DataAuthenticationDTO() {
+public record DataAuthentication(
+        String login,
+        String password
+) {
 }

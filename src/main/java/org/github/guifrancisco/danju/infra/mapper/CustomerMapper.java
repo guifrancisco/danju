@@ -1,4 +1,4 @@
-package org.github.guifrancisco.danju.mapper;
+package org.github.guifrancisco.danju.infra.mapper;
 
 import org.github.guifrancisco.danju.domain.dto.DataCustomer;
 import org.github.guifrancisco.danju.domain.dto.DataRegisterCustomer;

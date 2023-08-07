@@ -1,5 +1,7 @@
-package org.github.guifrancisco.danju.config;
+package org.github.guifrancisco.danju.infra.exception;
 
+import com.auth0.jwt.exceptions.JWTCreationException;
+import com.auth0.jwt.exceptions.JWTVerificationException;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.github.guifrancisco.danju.domain.dto.DataErrorResponse;
@@ -48,5 +50,21 @@ public class GlobalExceptionHandler {
         List<String> details = new ArrayList<>();
         details.add(e.getMessage());
         return ResponseEntity.status(500).body(new DataErrorResponse("Error", details));
+    }
+
+    @ExceptionHandler(JWTCreationException.class)
+    public ResponseEntity<DataErrorResponse> handleJWTCreationException(JWTCreationException e) {
+        List<String> details = new ArrayList<>();
+        details.add(e.getMessage());
+        DataErrorResponse error = new DataErrorResponse("JWT Creation Error", details);
+        return new ResponseEntity<>(error, HttpStatus.UNAUTHORIZED);
+    }
+
+    @ExceptionHandler(JWTVerificationException.class)
+    public ResponseEntity<DataErrorResponse> handleJWTVerificationException(JWTVerificationException e) {
+        List<String> details = new ArrayList<>();
+        details.add(e.getMessage());
+        DataErrorResponse error = new DataErrorResponse("JWT Verification Error", details);
+        return new ResponseEntity<>(error, HttpStatus.UNAUTHORIZED);
     }
 }

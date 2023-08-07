@@ -1,6 +1,7 @@
 package org.github.guifrancisco.danju.domain.entity;
 
 import jakarta.persistence.*;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -11,6 +12,7 @@ import java.util.List;
 @Getter
 @Setter
 @NoArgsConstructor
+@EqualsAndHashCode(of = "id")
 public class Product {
 
     @Id
@@ -19,6 +21,6 @@ public class Product {
     private String description;
     private double price;
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
-    private List<OrderProduct> orderProducts;
+    private List<OrderLine> orderLines;
 
 }

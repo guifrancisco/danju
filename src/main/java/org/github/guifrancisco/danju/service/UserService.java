@@ -2,16 +2,17 @@ package org.github.guifrancisco.danju.service;
 
 import lombok.extern.slf4j.Slf4j;
 
-import org.github.guifrancisco.danju.domain.dto.DataCustomer;
 import org.github.guifrancisco.danju.domain.dto.DataRegisterUser;
 import org.github.guifrancisco.danju.domain.dto.DataUpdateUser;
 import org.github.guifrancisco.danju.domain.dto.DataUser;
 import org.github.guifrancisco.danju.domain.entity.User;
-import org.github.guifrancisco.danju.repository.UserRepository;
+import org.github.guifrancisco.danju.infra.repository.UserRepository;
 
-import org.github.guifrancisco.danju.service.mapper.UserMapper;
+import org.github.guifrancisco.danju.infra.mapper.UserMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -22,14 +23,24 @@ public class UserService {
 
     private final UserMapper userMapper;
 
-    public UserService(UserRepository userRepository, UserMapper userMapper) {
+    private final PasswordEncoder passwordEncoder;
+
+    public UserService(UserRepository userRepository, UserMapper userMapper, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
         this.userMapper = userMapper;
+        this.passwordEncoder = passwordEncoder;
     }
 
     public void registerUser(DataRegisterUser dataRegisterUser){
         log.info("[UserService.registerUser] - [Service]");
+        User existingUser = userRepository.findByLogin(dataRegisterUser.login());
+
+        if (existingUser != null) {
+            throw new IllegalArgumentException("User already registered");
+        }
+
         User user = userMapper.toEntity(dataRegisterUser);
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
         userRepository.save(user);
     }
 
