@@ -21,12 +21,7 @@ public class ProductMapper {
     }
 
     public DataProduct toDto(Product product){
-        return new DataProduct(
-                product.getId(),
-                product.getName(),
-                product.getDescription(),
-                product.getPrice()
-        );
+        return new DataProduct(product);
     }
 
     public void updateEntityFromDto(Product product, DataUpdateProduct dataUpdateProduct){

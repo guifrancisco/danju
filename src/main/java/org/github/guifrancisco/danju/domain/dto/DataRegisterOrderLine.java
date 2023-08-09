@@ -1,6 +1,6 @@
 package org.github.guifrancisco.danju.domain.dto;
 
-public record DataOrderLine(
+public record DataRegisterOrderLine(
 
         String id,
 

@@ -21,12 +21,7 @@ public class CustomerMapper {
     }
 
     public DataCustomer toDto(Customer customer){
-        return new DataCustomer(
-                customer.getId(),
-                customer.getName(),
-                customer.getTelephone(),
-                customer.getAddress()
-        );
+        return new DataCustomer(customer);
     }
 
     public void updateEntityFromDto(Customer customer, DataUpdateCustomer dataUpdateCustomer){

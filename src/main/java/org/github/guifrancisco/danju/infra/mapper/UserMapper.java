@@ -33,13 +33,7 @@ public class UserMapper {
     }
 
     public DataUser toDto(User user){
-        return new DataUser(
-                user.getId(),
-                user.getName(),
-                user.getLogin(),
-                user.getEmail(),
-                user.getPassword()
-        );
+        return new DataUser(user);
     }
 
     public void updateEntityFromDto(User user, DataUpdateUser dataUpdateUser){
