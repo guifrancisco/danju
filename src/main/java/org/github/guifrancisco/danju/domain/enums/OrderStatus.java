@@ -1,17 +1,17 @@
 package org.github.guifrancisco.danju.domain.enums;
 
+import lombok.Getter;
+
+@Getter
 public enum OrderStatus {
     PLACED("placed"),
     PROCESSING("processing"),
     DELIVERED("delivered");
 
-    private String status;
+    private final String status;
 
     OrderStatus(String status) {
         this.status = status;
     }
 
-    public String getStatus() {
-        return status;
-    }
 }

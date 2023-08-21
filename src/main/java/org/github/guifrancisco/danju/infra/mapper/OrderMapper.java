@@ -9,6 +9,7 @@ import org.github.guifrancisco.danju.domain.entity.Order;
 import org.github.guifrancisco.danju.domain.entity.OrderLine;
 import org.github.guifrancisco.danju.domain.entity.Product;
 import org.github.guifrancisco.danju.domain.enums.OrderStatus;
+import org.github.guifrancisco.danju.domain.enums.PaymentType;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -23,8 +24,8 @@ public class OrderMapper {
         order.setId(UUID.randomUUID().toString());
         order.setCustomer(customer);
         order.setDeliveryDate(dataRegisterOrder.deliveryDate());
-        order.setTotalValue(dataRegisterOrder.totalValue());
         order.setStatus(convertToOrderStatus(dataRegisterOrder.status()));
+        order.setPaymentType(convertToPaymentType(dataRegisterOrder.paymentType()));
         order.setOrderLines(toOrderLines(dataRegisterOrder.orderLines(), order, products));
         return order;
     }
@@ -56,6 +57,15 @@ public class OrderMapper {
         throw new IllegalArgumentException("Invalid status: " + status);
     }
 
+    private PaymentType convertToPaymentType(String payment) {
+        for (PaymentType paymentType : PaymentType.values()) {
+            if (paymentType.getPaymentType().equalsIgnoreCase(payment)) {
+                return paymentType;
+            }
+        }
+        throw new IllegalArgumentException("Invalid status: " + payment);
+    }
+
     public void updateEntityFromDto(Order order, DataUpdateOrder dataUpdateOrder){
         if(dataUpdateOrder.deliveryDate() != null){
             order.setDeliveryDate(dataUpdateOrder.deliveryDate());
@@ -64,7 +74,7 @@ public class OrderMapper {
             order.setStatus(convertToOrderStatus(dataUpdateOrder.status()));
         }
         if(dataUpdateOrder.paymentType() != null){
-            order.setPaymentType(dataUpdateOrder.paymentType());
+            order.setPaymentType(convertToPaymentType(dataUpdateOrder.paymentType()));
         }
     }
 }

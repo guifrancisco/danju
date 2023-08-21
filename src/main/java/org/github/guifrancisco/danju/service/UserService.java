@@ -46,9 +46,22 @@ public class UserService {
 
     public void updateUser(String id,DataUpdateUser dataUpdateUser){
         log.info("[UserService.updateUser] - [Service]");
+
+        User existingUser = userRepository.findByLogin(dataUpdateUser.login());
+
+        if(existingUser != null){
+            throw new IllegalArgumentException("User already registered");
+        }
+
         User user = userRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("User with id " + id + " not found"));
         userMapper.updateEntityFromDto(user, dataUpdateUser);
+
+
+        if(dataUpdateUser.password() != null){
+            user.setPassword(passwordEncoder.encode(user.getPassword()));
+        }
+
         userRepository.save(user);
     }
 

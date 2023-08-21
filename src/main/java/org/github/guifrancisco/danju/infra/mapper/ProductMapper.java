@@ -25,11 +25,15 @@ public class ProductMapper {
     }
 
     public void updateEntityFromDto(Product product, DataUpdateProduct dataUpdateProduct){
+
         if(dataUpdateProduct.name() != null){
             product.setName(dataUpdateProduct.name());
         }
         if (dataUpdateProduct.description() != null){
             product.setDescription(dataUpdateProduct.description());
+        }
+        if (!Double.isNaN(dataUpdateProduct.price())) {
+            product.setPrice(dataUpdateProduct.price());
         }
     }
 }

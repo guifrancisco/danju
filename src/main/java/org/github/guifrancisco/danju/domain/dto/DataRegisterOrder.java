@@ -12,9 +12,10 @@ public record DataRegisterOrder(
         String customerId,
         @NotNull
         LocalDate deliveryDate,
-        double totalValue,
         @NotBlank
         String status,
+        @NotBlank
+        String paymentType,
         @NotEmpty
         List<DataRegisterOrderLine> orderLines
 

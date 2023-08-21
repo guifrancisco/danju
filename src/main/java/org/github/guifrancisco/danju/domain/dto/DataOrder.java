@@ -21,10 +21,10 @@ public record DataOrder(
                 order.getId(),
                 new DataCustomer(order.getCustomer()),
                 order.getOrderLines().stream()
-                        .map(orderLine -> new DataRegisterOrderLine(orderLine.getId(), orderLine.getProduct().getId(), orderLine.getQuantity()))
+                        .map(orderLine -> new DataRegisterOrderLine(orderLine.getId(), orderLine.getQuantity()))
                         .collect(Collectors.toList()),
                 order.getDeliveryDate(),
-                order.getPaymentType(),
+                order.getPaymentType().getPaymentType(),
                 order.getTotalValue(),
                 order.getStatus().getStatus(),
                 order.getCreatedBy()

@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.github.guifrancisco.danju.domain.enums.OrderStatus;
+import org.github.guifrancisco.danju.domain.enums.PaymentType;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDate;
@@ -32,7 +33,8 @@ public class Order {
 
     private LocalDate deliveryDate;
 
-    private String paymentType;
+    @Enumerated(EnumType.STRING)
+    private PaymentType paymentType;
 
     private double totalValue;
 

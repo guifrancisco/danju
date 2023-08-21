@@ -37,6 +37,19 @@ public class SecurityConfigurations{
                         .requestMatchers(HttpMethod.POST,"/v1/customer").hasRole("USER")
                         .requestMatchers(HttpMethod.POST,"/v1/product").hasRole("USER")
                         .requestMatchers(HttpMethod.POST,"/v1/order").hasRole("USER")
+                        .requestMatchers("/v3/api-docs",
+                                         "/v3/api-docs/**",
+                                         "/swagger-ui.html",
+                                         "/swagger-resources",
+                                         "/swagger-resources/*",
+                                         "/configuration/ui",
+                                         "/configuration/security",
+                                         "/webjars/**",
+                                         "/swagger-ui/**",
+                                         "/bus/v3/api-docs/**",
+                                         "/api-docs/**"
+                        )
+                        .permitAll()
                         .requestMatchers(HttpMethod.POST,"/v1/user").permitAll()
                         .anyRequest().authenticated()
                 )

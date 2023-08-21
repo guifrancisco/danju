@@ -47,7 +47,7 @@ public class OrderController {
         return ResponseEntity.ok().body(orders);
     }
 
-    @DeleteMapping
+    @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteOrder(@PathVariable String id){
         log.info("[OrderController.deleteOrder] - [Controller]");
         orderService.deleteOrder(id);
