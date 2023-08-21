@@ -1,4 +1,4 @@
-package org.github.guifrancisco.danju.infra.security;
+package org.github.guifrancisco.danju.infra.config;
 
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;

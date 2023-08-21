@@ -1,4 +1,4 @@
-package org.github.guifrancisco.danju.infra.security;
+package org.github.guifrancisco.danju.infra.config;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
@@ -34,10 +34,10 @@ public class SecurityConfigurations{
                 .sessionManagement(session-> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(authorize -> authorize
                         .requestMatchers(HttpMethod.POST, "/v1/auth/login").permitAll()
-                        .requestMatchers(HttpMethod.POST, "/v1/auth/register").permitAll()
                         .requestMatchers(HttpMethod.POST,"/v1/customer").hasRole("USER")
                         .requestMatchers(HttpMethod.POST,"/v1/product").hasRole("USER")
-                        .requestMatchers(HttpMethod.POST,"/v1/user").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.POST,"/v1/order").hasRole("USER")
+                        .requestMatchers(HttpMethod.POST,"/v1/user").permitAll()
                         .anyRequest().authenticated()
                 )
                 .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)
